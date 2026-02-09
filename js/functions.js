@@ -41,3 +41,30 @@ const filterDigitsFromString = (str) => {
 
 filterDigitsFromString();
 
+const isMeetingWithinWorkingHours = (startWork, endWork, meetingStart, durationMinutes) => {
+  // Функция преобразует строку формата "чч:мм" в количество минут с начала суток
+  const timeToMinutes = (timeStr) => {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
+
+  // Переводим все временные точки в минуты
+  const startWorkMinutes = timeToMinutes(startWork);
+  const endWorkMinutes = timeToMinutes(endWork);
+  const meetingStartMinutes = timeToMinutes(meetingStart);
+
+  // Вычисляем время окончания встречи
+  const meetingEndMinutes = meetingStartMinutes + durationMinutes;
+
+  // Проверяем, что встреча начинается не раньше начала рабочего дня
+  // и заканчивается не позже конца рабочего дня
+  return (
+    meetingStartMinutes >= startWorkMinutes &&
+    meetingEndMinutes <= endWorkMinutes
+  );
+};
+isMeetingWithinWorkingHours('08:00', '17:30', '14:00', 90); // true
+isMeetingWithinWorkingHours('8:0', '10:0', '8:0', 120); // true
+isMeetingWithinWorkingHours('08:00', '14:30', '14:00', 90); // false
+isMeetingWithinWorkingHours('14:00', '17:30', '08:0', 90); // false
+isMeetingWithinWorkingHours('8:00', '17:30', '08:00', 900); // false
