@@ -3,7 +3,9 @@ import { NAMES, MESSAGES } from './data.js';
 
 const ARRAY_LEN = 25;
 
-const generateId = (() => { let id = 1; return () => id++; })();
+const generateId = (() => {
+   let id = 1; return () => id++;
+  })();
 
 // Функция: генерация ОДНОГО комментария (объекта)
 function generateComment() {
