@@ -1,5 +1,5 @@
 import { getRandomInt, getRandomArrayName } from './util.js';
-import { NAMES, MESSAGES } from './data.js';
+import { NAMES, MESSAGES} from './data.js';
 
 const ARRAY_LEN = 25;
 

@@ -21,5 +21,44 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-export {NAMES, MESSAGES};
+const PHOTOS = [
+  {
+    url: 'photo-1',
+    description: 'Красивый закат на море',
+    likes: 125,
+    comments: 18
+  },
+  {
+    url: 'photo-2',
+    description: 'Горный пейзаж в тумане',
+    likes: 89,
+    comments: 5
+  },
+  {
+    url: 'photo-3',
+    description: 'Цветы в саду',
+    likes: 203,
+    comments: 32
+  },
+  {
+    url: 'photo-4',
+    description: 'Ночной город',
+    likes: 45,
+    comments: 8
+  },
+  {
+    url: 'photo-5',
+    description: 'Пейзаж с рекой',
+    likes: 76,
+    comments: 12
+  },
+  {
+    url: 'photo-6',
+    description: 'Лес осенью',
+    likes: 92,
+    comments: 21
+  }
+];
+
+export {NAMES, MESSAGES, PHOTOS};
 
