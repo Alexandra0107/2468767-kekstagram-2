@@ -27,8 +27,5 @@ for (let i = 0; i < PHOTOS.length; i++) {
   fragment.appendChild(element);
 }
 
-if (picturesContainer) {
   picturesContainer.appendChild(fragment);
-} else {
-  console.error('Контейнер .pictures не найден в DOM');
-}
+
