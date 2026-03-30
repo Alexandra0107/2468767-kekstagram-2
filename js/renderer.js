@@ -26,6 +26,5 @@ for (let i = 0; i < PHOTOS.length; i++) {
   // Добавляем элемент во fragment
   fragment.appendChild(element);
 }
-
-  picturesContainer.appendChild(fragment);
+picturesContainer.appendChild(fragment);
 
