@@ -1,4 +1,4 @@
-import {thumbsList} from './main';
+import {thumbsList} from './main.js';
 
 const templateFragment = document.querySelector('#picture').content;
 const template = templateFragment.querySelector('a');
