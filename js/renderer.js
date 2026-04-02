@@ -1,4 +1,4 @@
-import { PHOTOS } from './data.js';
+import {thumbsList} from './main';
 
 const templateFragment = document.querySelector('#picture').content;
 const template = templateFragment.querySelector('a');
@@ -6,8 +6,8 @@ const picturesContainer = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 
 // Проходим по данным и создаём элементы
-for (let i = 0; i < PHOTOS.length; i++) {
-  const data = PHOTOS[i];
+for (let i = 0; i < thumbsList.length; i++) {
+  const data = thumbsList[i];
 
   // Клонируем шаблон
   const element = template.cloneNode(true);
@@ -19,9 +19,9 @@ for (let i = 0; i < PHOTOS.length; i++) {
 
   // Заполняем данными
   img.src = data.url;
-  img.alt = data.description;
+  img.alt = data.descriptions;
   likes.textContent = data.likes;
-  comments.textContent = data.comments;
+  comments.textContent = data.comments.map(comment => comment.message).join(', ');
 
   // Добавляем элемент во fragment
   fragment.appendChild(element);
