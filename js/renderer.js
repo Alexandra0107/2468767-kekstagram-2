@@ -21,7 +21,7 @@ for (let i = 0; i < thumbsList.length; i++) {
   img.src = data.url;
   img.alt = data.descriptions;
   likes.textContent = data.likes;
-  comments.textContent = data.comments.map(comment => comment.message).join(', ');
+  comments.textContent = data.comments.map(comment => comment.message).join(',');
 
   // Добавляем элемент во fragment
   fragment.appendChild(element);
