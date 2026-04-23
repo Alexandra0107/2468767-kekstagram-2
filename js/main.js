@@ -1,8 +1,13 @@
 import { getThumbs } from './thumbs.js';
+import { renderThumbs } from './renderer.js'; // Импортируем нашу функцию
 
+// Получаем данные
 const thumbsList = getThumbs();
 
-// eslint-disable-next-line no-console
-console.log(thumbsList);
+// Находим шаблон и контейнер
+const templateFragment = document.querySelector('#picture').content;
+const template = templateFragment.querySelector('a');
+const picturesContainer = document.querySelector('.pictures');
 
-export {thumbsList};
+// Вызываем функцию для отрисовки
+renderThumbs(thumbsList, template, picturesContainer);

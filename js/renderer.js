@@ -1,30 +1,27 @@
-import {thumbsList} from './main.js';
+ const renderThumbs = (thumbsList, template, picturesContainer) => {
+  const fragment = document.createDocumentFragment();
 
-const templateFragment = document.querySelector('#picture').content;
-const template = templateFragment.querySelector('a');
-const picturesContainer = document.querySelector('.pictures');
-const fragment = document.createDocumentFragment();
+  thumbsList.forEach(data => {
+    // Клонируем шаблон
+    const element = template.cloneNode(true);
 
-// Проходим по данным и создаём элементы
-for (let i = 0; i < thumbsList.length; i++) {
-  const data = thumbsList[i];
+    // Находим нужные элементы внутри клона
+    const img = element.querySelector('.picture__img');
+    const likes = element.querySelector('.picture__likes');
+    const comments = element.querySelector('.picture__comments');
 
-  // Клонируем шаблон
-  const element = template.cloneNode(true);
+    // Заполняем данными (без проверок)
+    img.src = data.url;
+    img.alt = data.descriptions;
+    likes.textContent = data.likes;
+    comments.textContent = data.comments.length;
 
-  // Находим нужные элементы внутри клона
-  const img = element.querySelector('.picture__img');
-  const likes = element.querySelector('.picture__likes');
-  const comments = element.querySelector('.picture__comments');
+    // Добавляем элемент во fragment
+    fragment.appendChild(element);
+  });
 
-  // Заполняем данными
-  img.src = data.url;
-  img.alt = data.descriptions;
-  likes.textContent = data.likes;
-  comments.textContent = data.comments.length;
+  // Добавляем фрагмент в контейнер
+  picturesContainer.appendChild(fragment);
+};
 
-  // Добавляем элемент во fragment
-  fragment.appendChild(element);
-}
-picturesContainer.appendChild(fragment);
-
+export { renderThumbs };
