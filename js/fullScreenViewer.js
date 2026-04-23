@@ -1,4 +1,28 @@
- const openFullScreen = (photoData) => {
+const setupCloseHandlers = (bigPicture, body) => {
+  const closeButton = bigPicture.querySelector('.big-picture__cancel');
+
+  // Закрытие по клику на крестик
+  closeButton.addEventListener('click', closeFullScreen);
+
+  // Закрытие по нажатию Esc
+  document.addEventListener('keydown', onEscapePress);
+
+  function onEscapePress(evt) {
+    if (evt.key === 'Escape') {
+      closeFullScreen();
+    }
+  }
+
+  function closeFullScreen() {
+    bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
+    // Убираем обработчики событий при закрытии
+    closeButton.removeEventListener('click', closeFullScreen);
+    document.removeEventListener('keydown', onEscapePress);
+  }
+};
+
+const openFullScreen = (photoData) => {
   const bigPicture = document.querySelector('.big-picture');
   const body = document.body;
 
@@ -15,7 +39,7 @@
   const commentsContainer = bigPicture.querySelector('.social__comments');
   commentsContainer.innerHTML = ''; // Очищаем предыдущие комментарии
 
-  photoData.comments.forEach(comment => {
+  photoData.comments.forEach((comment) => {
     const commentElement = document.createElement('li');
     commentElement.className = 'social__comment';
     commentElement.innerHTML = `
@@ -43,27 +67,4 @@
   setupCloseHandlers(bigPicture, body);
 };
 
-const setupCloseHandlers = (bigPicture, body) => {
-  const closeButton = bigPicture.querySelector('.big-picture__cancel');
-
-  // Закрытие по клику на крестик
-  closeButton.addEventListener('click', closeFullScreen);
-
-  // Закрытие по нажатию Esc
-  document.addEventListener('keydown', onEscapePress);
-
-  function onEscapePress(evt) {
-    if (evt.key === 'Escape') {
-      closeFullScreen();
-    }
-  }
-
-  function closeFullScreen() {
-    bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
-    // Убираем обработчики событий при закрытии
-    closeButton.removeEventListener('click', closeFullScreen);
-    document.removeEventListener('keydown', onEscapePress);
-  }
-};
-export{openFullScreen};
+export { openFullScreen };
