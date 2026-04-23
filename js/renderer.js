@@ -3,7 +3,7 @@ const renderThumbs = (thumbsList, template, picturesContainer) => {
 
   thumbsList.forEach((data, index) => {
     // Клонируем шаблон
-    const element = template.cloneNode(true);    
+    const element = template.cloneNode(true);
     // Находим нужные элементы внутри клона
     const img = element.querySelector('.picture__img');
     const likes = element.querySelector('.picture__likes');
@@ -14,7 +14,6 @@ const renderThumbs = (thumbsList, template, picturesContainer) => {
     img.alt = data.descriptions;
     likes.textContent = data.likes;
     comments.textContent = data.comments.length;
-    
     element.dataset.id = index;
 
     // Добавляем элемент во fragment

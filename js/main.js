@@ -14,15 +14,15 @@ const picturesContainer = document.querySelector('.pictures');
 renderThumbs(thumbsList, template, picturesContainer);
 // Добавляем обработчики клика на миниатюры
 picturesContainer.addEventListener('click', (evt) => {
-    const thumbnail = evt.target.closest('.picture');
-    if (!thumbnail) {
-        return;
-    }
+const thumbnail = evt.target.closest('.picture');
+ if (!thumbnail) {
+    return;
+ }
 
-    const index = Number(thumbnail.dataset.id);
-    const photoData = thumbsList[index];
+const index = Number(thumbnail.dataset.id);
+const photoData = thumbsList[index];
 
-    if (photoData) {
-        openFullScreen(photoData);
-    }
+if (photoData) {
+    openFullScreen(photoData);
+}
 });
