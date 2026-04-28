@@ -4,15 +4,9 @@
 и возвращает true,
 если строка меньше или равна указанной длине,
 и false, если строка длиннее.*/
-/* eslint-disable no-console */
 const isStringWithinLimit = (str, maxLength) => str.length <= maxLength;
 
-// Строка короче 20 символов
-console.log(isStringWithinLimit('проверяемая строка', 20));// eslint-disable-next-line no-console
-// Длина строки ровно 18 символов
-console.log(isStringWithinLimit('проверяемая строка', 18));// eslint-disable-next-line no-console
-// Строка длиннее 10 символов
-console.log(isStringWithinLimit('проверяемая строка', 10));// eslint-disable-next-line no-console
+isStringWithinLimit();
 
 /*Функция для проверки, является ли строка палиндромом.
 Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево*/
@@ -22,13 +16,7 @@ const isPalindrome = (string) => {
   return formattedString === formattedString.split('').reverse().join('');
 };
 
-// Строка является палиндромом
-console.log(isPalindrome('топот'));// eslint-disable-next-line no-console
-// Несмотря на разный регистр, тоже палиндром
-console.log(isPalindrome('ДовОд'));// eslint-disable-next-line no-console
-console.log(isPalindrome('Кекс'));// eslint-disable-next-line no-console
-// Это палиндром
-console.log(isPalindrome('Лёша на полке клопа нашёл '));// eslint-disable-next-line no-console
+isPalindrome();
 
 /*Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
 Если в строке нет ни одной цифры, функция должна вернуть NaN*/
@@ -51,12 +39,32 @@ const filterDigitsFromString = (str) => {
   return digits ? parseInt(digits, 10) : NaN;
 };
 
-console.log(filterDigitsFromString('2023 год')); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString('ECMAScript 2022')); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString('1 кефир, 0.5 батона')); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString('агент 007')); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString('а я томат')); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString(2023)); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString(-1)); // eslint-disable-next-line no-console
-console.log(filterDigitsFromString(1.5)); // eslint-disable-next-line no-console
-/* eslint-disable no-console */
+filterDigitsFromString();
+
+const isMeetingWithinWorkingHours = (startWork, endWork, meetingStart, durationMinutes) => {
+  // Функция преобразует строку формата "чч:мм" в количество минут с начала суток
+  const timeToMinutes = (timeStr) => {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
+
+  // Переводим все временные точки в минуты
+  const startWorkMinutes = timeToMinutes(startWork);
+  const endWorkMinutes = timeToMinutes(endWork);
+  const meetingStartMinutes = timeToMinutes(meetingStart);
+
+  // Вычисляем время окончания встречи
+  const meetingEndMinutes = meetingStartMinutes + durationMinutes;
+
+  // Проверяем, что встреча начинается не раньше начала рабочего дня
+  // и заканчивается не позже конца рабочего дня
+  return (
+    meetingStartMinutes >= startWorkMinutes &&
+    meetingEndMinutes <= endWorkMinutes
+  );
+};
+isMeetingWithinWorkingHours('08:00', '17:30', '14:00', 90); // true
+isMeetingWithinWorkingHours('8:0', '10:0', '8:0', 120); // true
+isMeetingWithinWorkingHours('08:00', '14:30', '14:00', 90); // false
+isMeetingWithinWorkingHours('14:00', '17:30', '08:0', 90); // false
+isMeetingWithinWorkingHours('8:00', '17:30', '08:00', 900); // false
