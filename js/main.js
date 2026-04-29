@@ -1,17 +1,12 @@
 import { getThumbs } from './thumbs.js';
-import { renderThumbs } from './renderer.js';
-import { openFullScreen } from './fullScreenViewer.js';
+import { renderThumbs } from './render.js';
+import { openFullScreen } from './full-screen-vewer.js';
 
 // Получаем данные
 const thumbsList = getThumbs();
 
-// Находим шаблон и контейнер
-const templateFragment = document.querySelector('#picture').content;
-const template = templateFragment.querySelector('a');
-const picturesContainer = document.querySelector('.pictures');
-
-// Вызываем функцию для отрисовки
-renderThumbs(thumbsList, template, picturesContainer);
+// получаем контейнер после отрисвки в render и вызываем функцию
+const picturesContainer = renderThumbs(thumbsList);
 // Добавляем обработчики клика на миниатюры
 picturesContainer.addEventListener('click', (evt) => {
   const thumbnail = evt.target.closest('.picture');
