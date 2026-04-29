@@ -1,13 +1,20 @@
 import { isEscapeKey } from './util.js';
+
 const COMMENTS_PER_PAGE = 5;
 let currentCommentsShown = 0;
 let escapeHandler = null;
 
 // Закрытие модального окна
 const closeFullScreen = (bigPicture, body, closeButton) => {
-  if (bigPicture) {bigPicture.classList.add('hidden')};
-  if (body) {body.classList.remove('modal-open')};
-  if (closeButton) {closeButton.removeEventListener('click', closeFullScreen)};
+  if (bigPicture) {
+    bigPicture.classList.add('hidden');
+  }
+  if (body) {
+    body.classList.remove('modal-open');
+  }
+  if (closeButton) {
+    closeButton.removeEventListener('click', closeFullScreen);
+  }
   if (escapeHandler) {
     document.removeEventListener('keydown', escapeHandler);
     escapeHandler = null;
@@ -18,10 +25,14 @@ const closeFullScreen = (bigPicture, body, closeButton) => {
 // Настройка обработчиков закрытия
 const setupCloseHandlers = (bigPicture, body) => {
   const closeButton = bigPicture?.querySelector('.big-picture__cancel');
-  if (!closeButton){ return};
+  if (!closeButton) {
+    return;
+  }
 
   escapeHandler = (evt) => {
-    if (isEscapeKey(evt)) {closeFullScreen(bigPicture, body, closeButton)};
+    if (isEscapeKey(evt)) {
+      closeFullScreen(bigPicture, body, closeButton);
+    }
   };
 
   closeButton.addEventListener('click', () => closeFullScreen(bigPicture, body, closeButton));
@@ -31,10 +42,12 @@ const setupCloseHandlers = (bigPicture, body) => {
 // Обновление счётчика комментариев
 const updateCommentCount = (shown, total, bigPicture) => {
   const el = bigPicture?.querySelector('.social__comment-count');
-  if (el) {el.textContent = `${shown} из ${total} комментариев`};
+  if (el) {
+    el.textContent = `${shown} из ${total} комментариев`;
+  }
 };
 
-//Создаем элемент комментария
+// Создаём элемент комментария
 const createCommentElement = (comment) => {
   const commentEl = document.createElement('li');
   commentEl.className = 'social__comment';
@@ -78,27 +91,32 @@ const renderComments = (comments, bigPicture) => {
     commentsLoaderEl.classList.add('hidden');
   }
 };
+
 const openFullScreen = (photoData) => {
   const bigPicture = document.querySelector('.big-picture');
   const body = document.body;
 
-  // Проверка существования bigPicture
+  // Проверка существования bigPicture-без проверки выдавало ошибку в консоли
   if (!bigPicture) {
     console.error('Элемент .big-picture не найден в DOM');
     return;
   }
 
-  // Безопасное заполнение данных
+  //заполнение данных 
   const setTextContent = (selector, value) => {
     const el = bigPicture.querySelector(selector);
-    if (el) el.textContent = value;
+    if (el) {
+      el.textContent = value;
+    }
   };
   const setAttribute = (selector, attr, value) => {
     const el = bigPicture.querySelector(selector);
-    if (el){ el[attr] = value};
+    if (el) {
+      el[attr] = value;
+    }
   };
 
-  // Заполняем данные — устанавливаем .social__comment-total-count только один раз
+  // Заполняем данные 
   setAttribute('.big-picture__img img', 'src', photoData.url);
   setTextContent('.likes-count', photoData.likes);
   setTextContent('.social__comment-total-count', photoData.comments.length);
@@ -108,12 +126,18 @@ const openFullScreen = (photoData) => {
   const commentCountEl = bigPicture.querySelector('.social__comment-count');
   const commentsLoaderEl = bigPicture.querySelector('.comments-loader');
 
-  if (commentCountEl){commentCountEl.classList.remove('hidden')};
-  if (commentsLoaderEl) {commentsLoaderEl.classList.remove('hidden')};
+  if (commentCountEl) {
+    commentCountEl.classList.remove('hidden');
+  }
+  if (commentsLoaderEl) {
+    commentsLoaderEl.classList.remove('hidden');
+  }
 
   // Очищаем комментарии и сбрасываем счётчик
   const commentsContainer = bigPicture.querySelector('.social__comments');
-  if (commentsContainer){commentsContainer.innerHTML = ''};
+  if (commentsContainer) {
+    commentsContainer.innerHTML = '';
+  }
   currentCommentsShown = 0;
 
   // Отрисовываем первые комментарии
@@ -130,7 +154,7 @@ const openFullScreen = (photoData) => {
     });
   }
 
-  // Добавляем классы для отображения
+  // Добавляем классы 
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 
