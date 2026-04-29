@@ -82,6 +82,12 @@ const openFullScreen = (photoData) => {
   const bigPicture = document.querySelector('.big-picture');
   const body = document.body;
 
+  // Проверка существования bigPicture
+  if (!bigPicture) {
+    console.error('Элемент .big-picture не найден в DOM');
+    return;
+  }
+
   // Безопасное заполнение данных
   const setTextContent = (selector, value) => {
     const el = bigPicture.querySelector(selector);
