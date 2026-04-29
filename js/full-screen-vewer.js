@@ -98,8 +98,7 @@ const openFullScreen = (photoData) => {
 
   // Проверка существования bigPicture-без проверки выдавало ошибку в консоли
   if (!bigPicture) {
-    console.error('Элемент .big-picture не найден в DOM');
-    return;
+    throw new Error('Элемент .big-picture не найден в DOM');
   }
 
   //заполнение данных 
