@@ -4,4 +4,7 @@ const getRandomInt = (min, max)=> Math.floor(Math.random() * (max - min + 1)) + 
 // Функция: рандомный выбор случайного индекса из массива
 const getRandomArrayName = (array) => array[getRandomInt(0, array.length - 1)];
 
+//проверка нажатия esc
+export const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export {getRandomInt,getRandomArrayName};
