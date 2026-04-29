@@ -5,9 +5,9 @@ let escapeHandler = null;
 
 // Закрытие модального окна
 const closeFullScreen = (bigPicture, body, closeButton) => {
-  if (bigPicture) bigPicture.classList.add('hidden');
-  if (body) body.classList.remove('modal-open');
-  if (closeButton) closeButton.removeEventListener('click', closeFullScreen);
+  if (bigPicture) {bigPicture.classList.add('hidden')};
+  if (body) {body.classList.remove('modal-open')};
+  if (closeButton) {closeButton.removeEventListener('click', closeFullScreen)};
   if (escapeHandler) {
     document.removeEventListener('keydown', escapeHandler);
     escapeHandler = null;
@@ -18,10 +18,10 @@ const closeFullScreen = (bigPicture, body, closeButton) => {
 // Настройка обработчиков закрытия
 const setupCloseHandlers = (bigPicture, body) => {
   const closeButton = bigPicture?.querySelector('.big-picture__cancel');
-  if (!closeButton) return;
+  if (!closeButton){ return};
 
   escapeHandler = (evt) => {
-    if (isEscapeKey(evt)) closeFullScreen(bigPicture, body, closeButton);
+    if (isEscapeKey(evt)) {closeFullScreen(bigPicture, body, closeButton)};
   };
 
   closeButton.addEventListener('click', () => closeFullScreen(bigPicture, body, closeButton));
@@ -31,7 +31,7 @@ const setupCloseHandlers = (bigPicture, body) => {
 // Обновление счётчика комментариев
 const updateCommentCount = (shown, total, bigPicture) => {
   const el = bigPicture?.querySelector('.social__comment-count');
-  if (el) el.textContent = `${shown} из ${total} комментариев`;
+  if (el) {el.textContent = `${shown} из ${total} комментариев`};
 };
 
 //Создаем элемент комментария
@@ -63,7 +63,7 @@ const renderComments = (comments, bigPicture) => {
   const commentsToShow = comments.slice(currentCommentsShown, endIndex);
 
   // Отрисовываем новые комментарии
-  commentsToShow.forEach(comment => {
+  commentsToShow.forEach((comment) => {
     const commentElement = createCommentElement(comment);
     commentsContainer.appendChild(commentElement);
   });
@@ -82,12 +82,6 @@ const openFullScreen = (photoData) => {
   const bigPicture = document.querySelector('.big-picture');
   const body = document.body;
 
-  // Проверка существования bigPicture
-  if (!bigPicture) {
-    console.error('Элемент .big-picture не найден в DOM');
-    return;
-  }
-
   // Безопасное заполнение данных
   const setTextContent = (selector, value) => {
     const el = bigPicture.querySelector(selector);
@@ -95,7 +89,7 @@ const openFullScreen = (photoData) => {
   };
   const setAttribute = (selector, attr, value) => {
     const el = bigPicture.querySelector(selector);
-    if (el) el[attr] = value;
+    if (el){ el[attr] = value};
   };
 
   // Заполняем данные — устанавливаем .social__comment-total-count только один раз
@@ -108,12 +102,12 @@ const openFullScreen = (photoData) => {
   const commentCountEl = bigPicture.querySelector('.social__comment-count');
   const commentsLoaderEl = bigPicture.querySelector('.comments-loader');
 
-  if (commentCountEl) commentCountEl.classList.remove('hidden');
-  if (commentsLoaderEl) commentsLoaderEl.classList.remove('hidden');
+  if (commentCountEl){commentCountEl.classList.remove('hidden')};
+  if (commentsLoaderEl) {commentsLoaderEl.classList.remove('hidden')};
 
   // Очищаем комментарии и сбрасываем счётчик
   const commentsContainer = bigPicture.querySelector('.social__comments');
-  if (commentsContainer) commentsContainer.innerHTML = '';
+  if (commentsContainer){commentsContainer.innerHTML = ''};
   currentCommentsShown = 0;
 
   // Отрисовываем первые комментарии
