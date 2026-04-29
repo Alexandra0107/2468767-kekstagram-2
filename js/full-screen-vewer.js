@@ -101,7 +101,7 @@ const openFullScreen = (photoData) => {
     throw new Error('Элемент .big-picture не найден в DOM');
   }
 
-  //заполнение данных 
+  //заполнение данных
   const setTextContent = (selector, value) => {
     const el = bigPicture.querySelector(selector);
     if (el) {
@@ -115,7 +115,7 @@ const openFullScreen = (photoData) => {
     }
   };
 
-  // Заполняем данные 
+  // Заполняем данные
   setAttribute('.big-picture__img img', 'src', photoData.url);
   setTextContent('.likes-count', photoData.likes);
   setTextContent('.social__comment-total-count', photoData.comments.length);
@@ -153,7 +153,7 @@ const openFullScreen = (photoData) => {
     });
   }
 
-  // Добавляем классы 
+  // Добавляем классы
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 
