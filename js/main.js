@@ -1,6 +1,6 @@
 import { getThumbs } from './thumbs.js';
 import { renderThumbs } from './render.js';
-import { openFullScreen } from './full-screen-vewer.js';
+import { openFullScreen,initGallery } from './full-screen-vewer.js';
 
 // Получаем данные
 const thumbsList = getThumbs();
